@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="nl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PROTOCOL40 · Week 2 · Bioritme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;height:100%;background:#0d0d0d;overflow:hidden}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:0 0}
+#stage>section{position:absolute;inset:0;width:1920px;height:1080px;display:none}
+#stage>section.on{display:flex}
+#stage>section:not(.on) .rise{animation:none}
+section aside{display:none}
+p,h1,h2,h3{margin:0}
+#hud{position:fixed;right:16px;bottom:12px;font:14px 'Inter Tight',Arial,sans-serif;color:#888;opacity:0;transition:opacity .4s;pointer-events:none}
+body.show-hud #hud{opacity:1}
+section {
+  font-family: 'Inter Tight', Arial, sans-serif;
+  padding: 128px 128px 160px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+section.dark { background: #1a1a1a; color: #faf9eb; }
+section.light { background: #faf9eb; color: #1a1a1a; }
+section.red { background: #d0312d; color: #faf9eb; }
+section.center { justify-content: center; }
+section.cover { padding: 128px; justify-content: center; gap: 24px; }
+
+.eyebrow { font-size: 24px; letter-spacing: 4px; text-transform: uppercase; }
+.dark .eyebrow { color: #a9a89d; }
+.light .eyebrow { color: #6b6a60; }
+.red .eyebrow { color: #f6dcd9; }
+
+.hero { font-size: 180px; font-weight: 800; text-transform: uppercase; letter-spacing: -6px; line-height: 0.9; }
+.title { font-size: 96px; font-weight: 800; text-transform: uppercase; letter-spacing: -3px; line-height: 0.95; }
+.title-s { font-size: 72px; font-weight: 800; text-transform: uppercase; letter-spacing: -2px; line-height: 0.95; }
+.lead { font-family: 'Instrument Serif', 'Times New Roman', serif; font-style: italic; font-size: 56px; line-height: 1.2; }
+.dark .lead { color: #c9c8bc; }
+.light .lead { color: #4a4944; }
+.body { font-size: 34px; line-height: 1.4; }
+.dark .body { color: #c9c8bc; }
+.light .body { color: #4a4944; }
+.acc { color: #d0312d; }
+
+.big { font-size: 240px; font-weight: 800; letter-spacing: -10px; line-height: 0.85; color: #d0312d; white-space: nowrap; }
+.split { display: flex; gap: 80px; align-items: center; }
+.split-text { flex: 1; display: flex; flex-direction: column; gap: 24px; }
+
+.rows { display: flex; flex-direction: column; }
+.r { display: flex; gap: 48px; padding: 28px 0; align-items: baseline; border-top: 1px solid #3d3c38; }
+.light .r { border-top: 1px solid #d8d6c8; }
+.r-last { border-bottom: 1px solid #3d3c38; }
+.light .r-last { border-bottom: 1px solid #d8d6c8; }
+.r-head { width: 520px; font-size: 40px; font-weight: 700; text-transform: uppercase; letter-spacing: -1px; }
+.r-num { width: 120px; font-size: 40px; font-weight: 800; color: #d0312d; }
+.r-text { flex: 1; font-size: 32px; line-height: 1.4; }
+.dark .r-text { color: #c9c8bc; }
+.light .r-text { color: #4a4944; }
+
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.card { padding: 48px; border-radius: 24px; display: flex; flex-direction: column; gap: 20px; }
+.dark .card { background: #262522; }
+.light .card { background: #efedde; }
+.card-head { font-size: 44px; font-weight: 800; text-transform: uppercase; letter-spacing: -1px; line-height: 1; }
+.card-text { font-size: 32px; line-height: 1.4; }
+.dark .card-text { color: #c9c8bc; }
+.light .card-text { color: #4a4944; }
+
+.micro-table { font-size: 30px; color: #c9c8bc; }
+
+.footer { position: absolute; left: 128px; bottom: 64px; width: 1000px; font-size: 24px; }
+.dark .footer { color: #a9a89d; }
+.light .footer { color: #6b6a60; }
+.red .footer { color: #f6dcd9; }
+.cover-num { position: absolute; right: 128px; bottom: 128px; width: 640px; font-size: 360px; font-weight: 800; letter-spacing: -16px; line-height: 0.8; text-align: right; color: #d0312d; }
+
+.rise { animation: rise 600ms ease-out both; animation-delay: calc(var(--i, 0) * 120ms); }
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } }
+
+</style></head><body>
+<div id="stage">
+<section id="cover" class="dark cover" data-transition="fade">
+<p class="eyebrow">PROTOCOL40 · Week 2 · Masterclass</p>
+<h1 class="hero">Bioritme</h1>
+<p class="lead">Je biologische klok: waarom gezondheid begint bij het juiste ritme.</p>
+<p class="cover-num">02</p>
+<aside>Masterclass week 2, ongeveer 15 tot 20 minuten. Opbouw: leven we nog volgens ons natuurlijke ritme, wat is je bioritme, licht en donker, wat het doet met je hormonen en energie, wat er gebeurt als het verstoord raakt, en hoe je het met kleine gewoontes ondersteunt.</aside>
+</section>
+
+<section id="vraag1" class="light center" data-transition="fade">
+<p class="eyebrow">Herken je dit?</p>
+<div class="split">
+<p class="big rise">01</p>
+<div class="split-text rise" style="--i:1">
+<h2 class="title-s">Je wordt wakker en voelt je nog helemaal niet uitgerust.</h2>
+</div>
+</div>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme</p>
+<aside>Ik wil je eerst een vraag stellen. Hoe vaak word jij ’s ochtends wakker en voel je je eigenlijk nog helemaal niet uitgerust? Of misschien slaap je wel acht uur per nacht, maar word je alsnog moe wakker.</aside>
+</section>
+
+<section id="vraag2" class="light center" data-transition="fade">
+<p class="eyebrow">Herken je dit?</p>
+<div class="split">
+<p class="big rise">02</p>
+<div class="split-text rise" style="--i:1">
+<h2 class="title-s">Je hebt koffie nodig om op gang te komen.</h2>
+</div>
+</div>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme</p>
+<aside>Misschien heb je koffie nodig om op gang te komen.</aside>
+</section>
+
+<section id="vraag3" class="light center" data-transition="fade">
+<p class="eyebrow">Herken je dit?</p>
+<div class="split">
+<p class="big rise">03</p>
+<div class="split-text rise" style="--i:1">
+<h2 class="title-s">In de middag krijg je een enorme energiedip.</h2>
+</div>
+</div>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme</p>
+<aside>Merk je dat je ergens in de middag een enorme energiedip krijgt?</aside>
+</section>
+
+<section id="vraag4" class="light center" data-transition="fade">
+<p class="eyebrow">Herken je dit?</p>
+<div class="split">
+<p class="big rise">04</p>
+<div class="split-text rise" style="--i:1">
+<h2 class="title-s">’s Avonds, als je zou moeten slapen, heb je ineens weer energie.</h2>
+</div>
+</div>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme</p>
+<aside>Maar dat je ’s avonds, wanneer je eigenlijk zou moeten gaan slapen, ineens weer energie hebt.</aside>
+</section>
+
+<section id="modern" class="dark" data-transition="fade">
+<p class="eyebrow">Wat we vaak vergeten</p>
+<h2 class="title-s">Ons lichaam leeft op licht en donker. Wij niet meer<span class="acc">.</span></h2>
+<div class="cards">
+<div class="card rise"><p class="eyebrow">Ochtend</p><h3 class="card-head">Wakker in het donker</h3><p class="card-text">We worden wakker in een donkere slaapkamer.</p></div>
+<div class="card rise" style="--i:1"><p class="eyebrow">Overdag en avond</p><h3 class="card-head">Binnen en onder kunstlicht</h3><p class="card-text">De hele dag binnen, ’s avonds onder lampen en achter een scherm.</p></div>
+</div>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme</p>
+<aside>We zijn tegenwoordig ontzettend veel bezig met onze gezondheid: wat we eten, hoeveel we bewegen, welke supplementen we nemen. Maar er is iets wat we vaak vergeten. Ons lichaam heeft een biologisch ritme, dat sterk wordt beïnvloed door de afwisseling tussen licht en donker. Onze leefomgeving ziet er alleen heel anders uit. We worden wakker in donkere slaapkamers, zitten de hele dag binnen en ’s avonds onder kunstlicht of achter een scherm. En ondertussen verwachten we dat ons lichaam precies weet wanneer het wakker, actief, hongerig of slaperig moet zijn.</aside>
+</section>
+
+<section id="stelling" class="red center" data-transition="fade">
+<h2 class="title rise">Gezondheid gaat niet alleen over wat je doet.</h2>
+<h2 class="title rise" style="--i:2">Maar ook over wanneer je het doet.</h2>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme</p>
+<aside>In deze masterclass neem ik je mee in wat je bioritme is, waarom het zo belangrijk is en hoe je het met een paar eenvoudige aanpassingen kunt ondersteunen. Want gezondheid gaat niet alleen over wat je doet, maar ook over wanneer je het doet.</aside>
+</section>
+
+<section id="ritme" class="light center" data-transition="fade">
+<p class="eyebrow">Wat is je bioritme?</p>
+<div class="split">
+<p class="big rise">24 uur</p>
+<div class="split-text rise" style="--i:1">
+<h2 class="title-s">Je circadiane ritme</h2>
+<p class="body">Een intern ritme van ongeveer 24 uur. Overdag wil je lichaam actief zijn, helder denken, bewegen en voeding verwerken. ’s Nachts verschuift de nadruk naar slaap en herstel.</p>
+</div>
+</div>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme</p>
+<aside>Je hebt vast weleens gehoord van je biologische klok. Ons lichaam werkt met verschillende biologische ritmes, en een van de belangrijkste is het circadiane ritme. Dat is een intern ritme van ongeveer 24 uur, waarmee je lichaam allerlei processen organiseert. Overdag wil je actief kunnen zijn, helder nadenken, bewegen en voeding verwerken. ’s Nachts verschuift de nadruk naar slaap, herstel en andere processen die bij de biologische nacht horen.</aside>
+</section>
+
+<section id="regelt" class="dark" data-transition="fade">
+<p class="eyebrow">Je interne tijdsysteem</p>
+<h2 class="title">Wat je klok regelt</h2>
+<div class="rows">
+<div class="r rise"><h3 class="r-head">Alertheid</h3><p class="r-text">Wanneer je wakker en scherp bent.</p></div>
+<div class="r rise" style="--i:1"><h3 class="r-head">Melatonine</h3><p class="r-text">Wanneer je lichaam het signaal voor de nacht aanmaakt.</p></div>
+<div class="r rise" style="--i:2"><h3 class="r-head">Temperatuur</h3><p class="r-text">Hoe je lichaamstemperatuur over de dag verandert.</p></div>
+<div class="r rise" style="--i:3"><h3 class="r-head">Hormonen</h3><p class="r-text">Wanneer bepaalde hormonen worden afgegeven.</p></div>
+<div class="r r-last rise" style="--i:4"><h3 class="r-head">Energie</h3><p class="r-text">Hoe je lichaam omgaat met voeding en energie.</p></div>
+</div>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme</p>
+<aside>Denk bijvoorbeeld aan wanneer je wakker en alert bent, wanneer je lichaam melatonine aanmaakt, hoe je lichaamstemperatuur over de dag verandert, wanneer bepaalde hormonen worden afgegeven en hoe je lichaam omgaat met voeding en energie. Om dat allemaal op elkaar af te stemmen, heeft je lichaam een soort intern tijdsysteem.</aside>
+</section>
+
+<section id="orkest" class="dark" data-transition="fade">
+<p class="eyebrow">Je lichaam als orkest</p>
+<h2 class="title-s">Eén dirigent, veel muzikanten</h2>
+<div class="cards">
+<div class="card rise"><p class="eyebrow">De dirigent</p><h3 class="card-head">De SCN in je hersenen</h3><p class="card-text">De suprachiasmatische kern: een kleine groep zenuwcellen die werkt als je centrale biologische klok.</p></div>
+<div class="card rise" style="--i:1"><p class="eyebrow">De muzikanten</p><h3 class="card-head">Je organen</h3><p class="card-text">Je lever, darmen, alvleesklier en andere organen hebben elk een eigen biologisch ritme.</p></div>
+</div>
+<p class="lead rise" style="--i:2">Volgt iedereen hetzelfde tempo, dan werkt alles goed samen.</p>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme</p>
+<aside>In je hersenen zit een kleine groep zenuwcellen: de suprachiasmatische kern, of de SCN. Die kun je zien als je centrale biologische klok. Maar het bijzondere is dat niet alleen je hersenen een klok hebben. Ook je lever, darmen, alvleesklier en andere organen hebben een eigen ritme. Je kunt je lichaam vergelijken met een orkest. De centrale klok is de dirigent, je organen zijn de muzikanten. Volgt iedereen hetzelfde ritme, dan werken de processen goed samen. Geeft de dirigent een ander tempo aan dan de muzikanten, dan raakt de samenwerking verstoord.</aside>
+</section>
+
+<section id="klok" class="dark" data-transition="fade">
+<p class="eyebrow">Je hoofdklok</p>
+<h2 class="title-s">Licht zet je klok gelijk</h2>
+<div class="rise" style="--i:1;position:relative;width:1664px;height:580px">
+<svg aria-label="Links een zon met het woord Licht, met een pijl naar een hoofd in profiel. In het hoofd de hersenen, met in het midden de hypothalamus in rood en daarin de SCN als geel puntje. Rechts een klok." width="1664" height="580" viewBox="0 0 1664 580" style="position:absolute;left:0;top:0;width:1664px;height:580px">
+<circle cx="180" cy="250" r="118" fill="none" stroke="#e0a63a" stroke-width="44" stroke-dasharray="14 22"/>
+<circle cx="180" cy="250" r="92" fill="#f5d465"/>
+<path d="M330 250 L410 250" stroke="#d0312d" stroke-width="16" stroke-linecap="round"/>
+<path d="M400 226 L440 250 L400 274 Z" fill="#d0312d"/>
+<path d="M760 580 L760 480 C700 480 640 468 612 440 C592 420 600 398 590 382 C570 376 558 360 574 344 C560 334 556 318 570 302 C546 292 540 272 560 252 C540 238 546 216 560 200 C572 116 652 34 804 26 C984 18 1124 122 1144 272 C1158 384 1104 456 1064 488 L1064 580 Z" fill="#2e2d29"/>
+<path d="M640 200 C640 120 720 70 820 66 C930 62 1040 110 1060 190 C1078 262 1030 300 980 306 C940 312 900 300 860 304 C800 310 740 300 700 280 C660 262 640 236 640 200 Z" fill="#efe3d0"/>
+<path d="M700 150 C730 120 770 130 790 110 M820 100 C860 120 880 90 920 110 M950 130 C980 150 1010 140 1030 170 M690 220 C720 200 760 220 790 200 M840 170 C870 190 910 160 940 190 M960 230 C990 220 1010 250 1040 240 M760 270 C790 250 820 270 850 255" fill="none" stroke="#c9b59a" stroke-width="6" stroke-linecap="round"/>
+<path d="M930 300 C940 340 950 380 944 430 L912 430 C912 380 906 340 896 304 Z" fill="#e2d2bb"/>
+<path d="M790 276 C810 256 860 254 890 268 C900 290 880 304 860 300 C840 316 812 318 796 304 C784 296 782 286 790 276 Z" fill="#d0312d"/>
+<circle cx="812" cy="300" r="10" fill="#f5d465"/>
+<path d="M540 470 L806 306" stroke="#faf9eb" stroke-width="3"/>
+<path d="M900 470 L852 300" stroke="#faf9eb" stroke-width="3"/>
+<circle cx="1420" cy="200" r="118" fill="#262522" stroke="#d0312d" stroke-width="16"/>
+<path d="M1420 200 L1420 118 M1420 200 L1474 236" stroke="#faf9eb" stroke-width="12" stroke-linecap="round"/>
+</svg>
+<p style="position:absolute;left:100px;top:226px;width:160px;text-align:center;font-size:40px;font-weight:800;color:#1a1a1a">Licht</p>
+<p style="position:absolute;left:300px;top:480px;width:460px;font-size:30px;font-weight:800">Suprachiasmatische kern (SCN)</p>
+<p style="position:absolute;left:300px;top:522px;width:460px;font-size:26px;color:#d0312d">soe-pra-chi-as-MA-ti-sche kern</p>
+<p style="position:absolute;left:820px;top:480px;width:300px;font-size:30px;font-weight:800">Hypothalamus</p>
+<p style="position:absolute;left:820px;top:522px;width:300px;font-size:26px;color:#d0312d">hie-po-TA-la-mus</p>
+<p style="position:absolute;left:1224px;top:360px;width:440px;text-align:right;font-size:32px;font-weight:700;line-height:1.3">De hoofdklok van je brein, de SCN, krijgt lichtsignalen uit je omgeving.</p>
+</div>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme</p>
+<aside>Hoe weet die dirigent welk tempo hij moet aangeven? Via licht. Daglicht valt in je ogen, en speciale lichtgevoelige cellen in je netvlies geven dat door aan je hersenen. Daar komt het bij de suprachiasmatische kern, de SCN. Dat is de hoofdklok van je brein, en die zit in je hypothalamus, midden in je hersenen. De SCN krijgt dus elke dag van het licht uit je omgeving te horen hoe laat het is, en geeft dat tempo door aan de rest van je lichaam.</aside>
+</section>
+
+<section id="signaal" class="dark center" data-transition="fade">
+<p class="eyebrow">Licht en donker</p>
+<h2 class="title rise">Hoe weet je lichaam eigenlijk hoe laat het is<span class="acc">?</span></h2>
+<p class="lead rise" style="--i:1">Het heeft geen klok aan de muur nodig. Het leest signalen uit je omgeving, en het sterkste signaal is licht.</p>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme</p>
+<aside>Hoe weet je lichaam eigenlijk hoe laat het is? Het bijzondere is dat het geen klok aan de muur nodig heeft. Het gebruikt signalen uit je omgeving, en een van de krachtigste signalen is licht. Als natuurlijk licht je ogen bereikt, gaat die informatie via speciale lichtgevoelige cellen in je netvlies naar je hersenen, onder andere naar je centrale klok. Zo stemt je lichaam zijn interne ritme af op de buitenwereld.</aside>
+</section>
+
+<section id="licht" class="light" data-transition="fade">
+<p class="eyebrow">Licht over de dag</p>
+<h2 class="title">Drie momenten die tellen</h2>
+<div class="rows">
+<div class="r rise"><h3 class="r-head">Ochtendlicht</h3><p class="r-text">Vertelt je lichaam dat de dag begonnen is. Het ondersteunt je alertheid en de timing van je hormonen.</p></div>
+<div class="r rise" style="--i:1"><h3 class="r-head">Daglicht overdag</h3><p class="r-text">Maakt het verschil tussen je biologische dag en nacht duidelijk.</p></div>
+<div class="r r-last rise" style="--i:2"><h3 class="r-head">Donker in de avond</h3><p class="r-text">Geeft je lichaam de ruimte om de biologische nacht in te gaan.</p></div>
+</div>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme</p>
+<aside>Stel je voor dat je ’s ochtends wakker wordt. Buiten wordt het licht, en je lichaam krijgt het signaal dat de dag begonnen is. Dat licht helpt je klok om zich af te stemmen, ondersteunt je natuurlijke alertheid en helpt bij de timing van hormonale processen. Maar het gaat niet alleen om de ochtend. Ook de rest van de dag heeft je lichaam baat bij daglicht. En als het ’s avonds donker wordt, krijgt je lichaam de kans om de biologische nacht in te gaan.</aside>
+</section>
+
+<section id="kleur" class="dark" data-transition="fade">
+<p class="eyebrow">De kleur van daglicht</p>
+<h2 class="title-s">Het spectrum van zonlicht over de dag</h2>
+<div class="rise" style="--i:1;position:relative;width:1664px;height:530px">
+<svg aria-label="Bovenaan een landschap van zonsopkomst links tot zonsondergang rechts. Daaronder de zon op zeven momenten van de dag: bij opkomst en ondergang VIS+IR, in de ochtend en middag UVA+VIS+IR, en midden op de dag UVB+UVA+VIS+IR. De kleur loopt van rood en geel naar wit en weer terug. Onderaan een kleurtemperatuurbalk van 1800K rood, via 4000K geel, 5500K en 8000K wit, naar 12000K en 16000K blauw." width="1664" height="480" viewBox="0 0 1664 480" style="position:absolute;left:0;top:0;width:1664px;height:480px">
+<defs>
+<linearGradient id="lucht" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ef9a54"/><stop offset="0.2" stop-color="#e9c9a3"/><stop offset="0.5" stop-color="#bcd3e2"/><stop offset="0.8" stop-color="#e7c39b"/><stop offset="1" stop-color="#ef9a54"/></linearGradient>
+<linearGradient id="dag" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e8401c"/><stop offset="0.12" stop-color="#f7941d"/><stop offset="0.25" stop-color="#f9e04b"/><stop offset="0.4" stop-color="#fbfbf2"/><stop offset="0.5" stop-color="#e3f1f8"/><stop offset="0.6" stop-color="#fbfbf2"/><stop offset="0.75" stop-color="#f9e04b"/><stop offset="0.88" stop-color="#f7941d"/><stop offset="1" stop-color="#e8401c"/></linearGradient>
+<linearGradient id="kelvin" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e8401c"/><stop offset="0.1" stop-color="#f7941d"/><stop offset="0.22" stop-color="#f9e04b"/><stop offset="0.38" stop-color="#fbfbf2"/><stop offset="0.55" stop-color="#fbfbf2"/><stop offset="0.72" stop-color="#cfeaf7"/><stop offset="0.86" stop-color="#8fd3f0"/><stop offset="1" stop-color="#6aa9d8"/></linearGradient>
+<g id="zon"><circle r="31" fill="none" stroke="#c98d2b" stroke-width="12" stroke-dasharray="4 6.2"/><circle r="21" fill="#e0a63a"/></g>
+</defs>
+<rect x="0" y="0" width="1664" height="160" fill="url(#lucht)"/>
+<circle cx="90" cy="96" r="18" fill="#fbe7a1"/>
+<circle cx="1580" cy="114" r="18" fill="#fbe7a1"/>
+<path d="M0 160 L0 120 C120 100 200 90 300 110 C420 130 520 95 640 120 C700 130 760 125 832 128 C950 132 1050 110 1180 120 C1300 130 1400 105 1500 115 C1580 122 1630 118 1664 125 L1664 160 Z" fill="#141413"/>
+<rect x="826" y="70" width="12" height="62" fill="#141413"/>
+<ellipse cx="832" cy="58" rx="62" ry="32" fill="#141413"/>
+<ellipse cx="796" cy="76" rx="36" ry="20" fill="#141413"/>
+<ellipse cx="868" cy="74" rx="38" ry="22" fill="#141413"/>
+<rect x="0" y="180" width="1664" height="200" fill="url(#dag)"/>
+<use href="#zon" x="60" y="335"/>
+<use href="#zon" x="330" y="290"/>
+<use href="#zon" x="610" y="245"/>
+<use href="#zon" x="832" y="225"/>
+<use href="#zon" x="1054" y="245"/>
+<use href="#zon" x="1334" y="290"/>
+<use href="#zon" x="1604" y="335"/>
+<rect x="2" y="402" width="1660" height="66" rx="10" fill="url(#kelvin)" stroke="#faf9eb" stroke-width="4"/>
+</svg>
+<p style="position:absolute;left:100px;top:338px;width:160px;font-size:26px;font-weight:700;color:#1a1a1a">VIS+IR</p>
+<p style="position:absolute;left:372px;top:293px;width:220px;font-size:26px;font-weight:700;color:#1a1a1a">UVA+VIS+IR</p>
+<p style="position:absolute;left:632px;top:268px;width:400px;text-align:center;font-size:26px;font-weight:700;color:#1a1a1a">UVB+UVA+VIS+IR</p>
+<p style="position:absolute;left:1072px;top:293px;width:220px;text-align:right;font-size:26px;font-weight:700;color:#1a1a1a">UVA+VIS+IR</p>
+<p style="position:absolute;left:1404px;top:338px;width:160px;text-align:right;font-size:26px;font-weight:700;color:#1a1a1a">VIS+IR</p>
+<p style="position:absolute;left:0;top:488px;width:140px;font-size:28px;font-weight:800">1800K</p>
+<p style="position:absolute;left:296px;top:488px;width:140px;text-align:center;font-size:28px;font-weight:800">4000K</p>
+<p style="position:absolute;left:612px;top:488px;width:140px;text-align:center;font-size:28px;font-weight:800">5500K</p>
+<p style="position:absolute;left:845px;top:488px;width:140px;text-align:center;font-size:28px;font-weight:800">8000K</p>
+<p style="position:absolute;left:1161px;top:488px;width:160px;text-align:center;font-size:28px;font-weight:800">12000K</p>
+<p style="position:absolute;left:1504px;top:488px;width:160px;text-align:right;font-size:28px;font-weight:800">16000K</p>
+</div>
+<p class="body rise" style="--i:2;font-size:24px">VIS = zichtbaar licht · IR = infrarood · UVA en UVB = ultraviolet · K = kleurtemperatuur in Kelvin</p>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme · naar Alexander Wunsch</p>
+<aside>Daglicht is niet de hele dag hetzelfde. Bovenaan zie je de dag van zonsopkomst tot zonsondergang. Als de zon net op is, krijg je alleen zichtbaar licht en infrarood, VIS en IR, in warme rode en oranje tinten. Komt de zon hoger, dan komt er UVA bij. Midden op de dag, als de zon het hoogst staat, krijg je ook UVB. Richting de avond gaat het weer terug: eerst valt UVB weg, dan UVA. Onderaan zie je de kleurtemperatuur in Kelvin: van warm rood rond 1800K, via geel en wit, naar koel blauw licht tot 16000K. Je lichaam leest dus niet alleen of het licht is, maar ook wat voor licht het is.</aside>
+</section>
+
+<section id="buiten" class="dark center" data-transition="fade">
+<p class="eyebrow">Binnen versus buiten</p>
+<h2 class="title rise">Ook een grijze dag is buiten veel lichter dan binnen<span class="acc">.</span></h2>
+<p class="lead rise" style="--i:1">Binnen voelt het licht genoeg. Voor je biologische klok is het dat vaak niet.</p>
+<p class="body rise" style="--i:2">Je hoeft niet in de volle zon te staan. Even naar buiten is al genoeg.</p>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme</p>
+<aside>Daarom is het zo waardevol om ’s ochtends naar buiten te gaan. En daar hoef je echt niet voor in de volle zon te staan. Ook op een bewolkte dag is het buiten doorgaans veel lichter dan binnen. We zitten op kantoor, in de auto of thuis, en hoewel die ruimtes voor ons gevoel goed verlicht zijn, is de hoeveelheid licht vaak veel lager dan buiten. Daardoor wordt het verschil tussen de biologische dag en nacht minder duidelijk.</aside>
+</section>
+
+<section id="avond" class="dark" data-transition="fade">
+<p class="eyebrow">De avond</p>
+<h2 class="title-s">Licht op het verkeerde moment</h2>
+<div class="cards">
+<div class="card rise"><p class="eyebrow">Wat je lichaam wil</p><h3 class="card-head">Donker en melatonine</h3><p class="card-text">Als het donker wordt, maakt je lichaam melatonine aan: het signaal dat het nacht is.</p></div>
+<div class="card rise" style="--i:1"><p class="eyebrow">Wat wij doen</p><h3 class="card-head">Lampen, tv en telefoon</h3><p class="card-text">Fel licht in de avond kan de aanmaak van melatonine onderdrukken en je klok later zetten.</p></div>
+</div>
+<p class="lead rise" style="--i:2">Je kunt moe zijn, terwijl je lichaam nog niet klaar is voor de nacht.</p>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme</p>
+<aside>’s Avonds gebeurt er iets interessants. Als het donkerder wordt, kan je lichaam de biologische nacht in. Een belangrijk hormoon daarbij is melatonine. Dat wordt vooral tijdens de biologische nacht aangemaakt en vertelt je lichaam als het ware dat het nacht is. Maar wat doen wij? We doen alle lampen aan, kijken tv en zitten op onze telefoon. Ons lichaam krijgt licht op een moment dat het van nature donker zou worden. Vooral fel licht in de avond kan de melatonineaanmaak onderdrukken en je klok naar later verschuiven. Je kunt dus moe zijn, terwijl je lichaam nog niet goed is voorbereid op de nacht.</aside>
+</section>
+
+<section id="hormonen" class="light" data-transition="fade">
+<p class="eyebrow">Je ritme en je hormonen</p>
+<h2 class="title-s">Twee hormonen, twee dagpatronen</h2>
+<div class="cards">
+<div class="card rise"><p class="eyebrow">Ochtend</p><h3 class="card-head">Cortisol</h3><p class="card-text">Meer dan een stresshormoon: het helpt bij je stofwisseling en alertheid. Het stijgt rond het wakker worden en daalt later op de dag.</p></div>
+<div class="card rise" style="--i:1"><p class="eyebrow">Avond</p><h3 class="card-head">Melatonine</h3><p class="card-text">Het signaal voor de biologische nacht. Het helpt je lichaam de overgang naar de nacht te organiseren.</p></div>
+</div>
+<p class="lead rise" style="--i:2">Je wilt cortisol niet zo laag mogelijk. Je wilt dat je lichaam het op het juiste moment aanmaakt.</p>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme</p>
+<aside>Je biologische klok heeft invloed op veel meer dan je slaap. Laten we beginnen met cortisol. Het wordt vaak het stresshormoon genoemd, maar dat doet het tekort. Het helpt ook bij je stofwisseling, je alertheid en je reactie op stress. Het heeft een natuurlijk dagritme: bij veel mensen stijgt het rond het wakker worden en is het later op de dag lager. Cortisol is dus niet iets wat je zo laag mogelijk wilt hebben. Je wilt dat je lichaam het goed kan reguleren. Aan de andere kant heb je melatonine, het signaal voor de biologische nacht. Twee hormonen met verschillende functies en verschillende dagpatronen.</aside>
+</section>
+
+<section id="dagritme" class="light" data-transition="fade">
+<p class="eyebrow">Cortisol en melatonine over 24 uur</p>
+<h2 class="title-s">Je dag-en-nachtritme</h2>
+<div style="display:flex;gap:64px">
+<p class="body" style="font-size:28px"><span class="acc"><b>━ Cortisol</b></span> maakt je wakker en alert. Piekt kort na het opstaan.</p>
+<p class="body" style="font-size:28px"><b style="color:#1a1a1a">━ Melatonine</b> maakt je slaperig. Stijgt als het donker wordt.</p>
+</div>
+<div style="position:relative;width:1664px;height:470px">
+<svg class="rise" aria-label="Schematische grafiek over 24 uur, van 06:00 tot 06:00. Cortisol piekt rond 07:30 en zakt in de loop van de dag tot het laagste punt rond middernacht, en stijgt dan weer richting de ochtend. Melatonine is overdag laag, stijgt vanaf ongeveer 21:00, piekt in de nacht rond 02:30 en zakt tegen de ochtend." width="1664" height="420" viewBox="0 0 1664 420" style="position:absolute;left:0;top:0;width:1664px;height:420px">
+<rect x="1109" y="0" width="555" height="400" fill="#ebe8d6"/>
+<line x1="0" y1="400" x2="1664" y2="400" stroke="#b9b6a5" stroke-width="2"/>
+<path d="M0 200 C40 120, 70 40, 104 40 C160 40, 260 170, 416 230 S 700 310, 832 330 S 1100 375, 1248 385 C1300 390, 1340 390, 1380 370 S 1560 280, 1664 200" fill="none" stroke="#d0312d" stroke-width="7" stroke-linecap="round"/>
+<path d="M0 330 C50 370, 90 395, 139 395 L 860 393 C 930 390, 990 370, 1040 330 C1110 260, 1150 200, 1179 170 C1260 90, 1340 50, 1421 50 C1470 50, 1500 90, 1525 120 C1580 190, 1620 280, 1664 330" fill="none" stroke="#1a1a1a" stroke-width="7" stroke-linecap="round"/>
+</svg>
+<p class="eyebrow" style="position:absolute;left:1109px;top:16px;width:555px;text-align:center;color:#1a1a1a">Nacht</p>
+<p style="position:absolute;left:0;top:428px;width:80px;font-size:24px;color:#6b6a60">06:00</p>
+<p style="position:absolute;left:168px;top:428px;width:80px;text-align:center;font-size:24px;color:#6b6a60">09:00</p>
+<p style="position:absolute;left:376px;top:428px;width:80px;text-align:center;font-size:24px;color:#6b6a60">12:00</p>
+<p style="position:absolute;left:584px;top:428px;width:80px;text-align:center;font-size:24px;color:#6b6a60">15:00</p>
+<p style="position:absolute;left:792px;top:428px;width:80px;text-align:center;font-size:24px;color:#6b6a60">18:00</p>
+<p style="position:absolute;left:1000px;top:428px;width:80px;text-align:center;font-size:24px;color:#6b6a60">21:00</p>
+<p style="position:absolute;left:1208px;top:428px;width:80px;text-align:center;font-size:24px;color:#6b6a60">00:00</p>
+<p style="position:absolute;left:1416px;top:428px;width:80px;text-align:center;font-size:24px;color:#6b6a60">03:00</p>
+<p style="position:absolute;left:1584px;top:428px;width:80px;text-align:right;font-size:24px;color:#6b6a60">06:00</p>
+</div>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme · schematisch</p>
+<aside>Zo zien die twee hormonen eruit over 24 uur. Dit is schematisch, bij iedereen is het net iets anders. Cortisol, de rode lijn, piekt kort na het opstaan en maakt je wakker en alert. In de loop van de dag zakt het, tot het laagste punt rond middernacht. Melatonine, de zwarte lijn, is overdag laag. Zodra het donker wordt, stijgt het, en in de nacht piekt het. Tegen de ochtend zakt melatonine weer en komt cortisol op. Twee hormonen die elkaar netjes aflossen, zolang je lichaam de juiste signalen krijgt.</aside>
+</section>
+
+<section id="stofwisseling" class="dark center" data-transition="fade">
+<p class="eyebrow">Je ritme en je stofwisseling</p>
+<h2 class="title rise">Dezelfde maaltijd, een ander tijdstip, een andere reactie<span class="acc">.</span></h2>
+<p class="body rise" style="--i:1">Je insulinegevoeligheid en je glucoseverwerking veranderen over de dag. Ook de hormonen voor honger en verzadiging hangen samen met je slaap en je ritme, zoals leptine. Daarover meer in week 4.</p>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme</p>
+<aside>Je biologische klok beïnvloedt ook hoe je lichaam omgaat met voeding. Je insulinegevoeligheid en glucoseverwerking veranderen over de dag. Dezelfde maaltijd kan op een ander tijdstip dus een andere reactie geven. Ook hormonen voor honger, verzadiging en energie staan in verbinding met slaap en je ritme. Een daarvan is leptine, die je vetweefsel en je hersenen laat praten over je energiestatus. Daar gaan we in week 4 uitgebreid op in. Voor nu: je klok bepaalt niet alleen wanneer je slaapt, maar ook hoe je lichaam energie regelt.</aside>
+</section>
+
+<section id="dag" class="light" data-transition="fade">
+<p class="eyebrow">Kijk eens naar je eigen dag</p>
+<h2 class="title-s">Herken je deze dag<span class="acc">?</span></h2>
+<div class="rows">
+<div class="r rise"><h3 class="r-head">Ochtend</h3><p class="r-text">Wakker worden en direct je telefoon pakken.</p></div>
+<div class="r rise" style="--i:1"><h3 class="r-head">Overdag</h3><p class="r-text">De hele dag binnen op je werk.</p></div>
+<div class="r rise" style="--i:2"><h3 class="r-head">Avond</h3><p class="r-text">Alle lampen aan, tv kijken, scrollen en laat naar bed.</p></div>
+<div class="r rise" style="--i:3"><h3 class="r-head">Nacht</h3><p class="r-text">Te kort slapen, want de wekker gaat weer vroeg.</p></div>
+<div class="r r-last rise" style="--i:4"><h3 class="r-head">Weekend</h3><p class="r-text">Lang uitslapen om de gemiste slaap in te halen.</p></div>
+</div>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme</p>
+<aside>Kijk nu eens naar je eigen gewoontes. Misschien word je wakker en pak je direct je telefoon. Dan ga je naar je werk en zit je de hele dag binnen. Als je thuiskomt wordt het buiten donker, maar binnen gaan alle lampen aan. Je kijkt nog wat tv, scrolt door social media en gaat laat naar bed. De volgende ochtend gaat de wekker weer vroeg. En in het weekend probeer je de gemiste slaap in te halen door lang uit te slapen. Voor veel mensen is dit normaal geworden.</aside>
+</section>
+
+<section id="ontregeling" class="red center" data-transition="fade">
+<p class="eyebrow">Circadiane ontregeling</p>
+<h2 class="title rise">Te weinig licht als het dag is. Te veel als het nacht is.</h2>
+<p class="lead rise" style="--i:1">Op de lange termijn kan dat bijdragen aan problemen met je slaap, je alertheid en je stofwisseling.</p>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme</p>
+<aside>Voor je biologische klok zijn al die wisselende signalen behoorlijk verwarrend. Je lichaam krijgt op sommige momenten te weinig licht en op andere juist te veel. En onregelmatige slaap- en eetmomenten zorgen ervoor dat processen minder goed op elkaar zijn afgestemd. Dat noemen we circadiane ontregeling. Op de lange termijn kan dat bijdragen aan problemen met slaap, alertheid en stofwisseling. Dat betekent niet dat elke vermoeidheidsklacht of elk hormonaal probleem hierdoor komt. Maar het is wel een belangrijke factor die we niet moeten vergeten.</aside>
+</section>
+
+<section id="gewoontes" class="dark" data-transition="fade">
+<p class="eyebrow">Je ritme ondersteunen</p>
+<h2 class="title-s">Vijf eenvoudige gewoontes</h2>
+<div class="rows">
+<div class="r rise"><h3 class="r-num">01</h3><p class="r-text"><b style="color:#faf9eb">Begin met daglicht.</b> Binnen een uur na het opstaan even naar buiten.</p></div>
+<div class="r rise" style="--i:1"><h3 class="r-num">02</h3><p class="r-text"><b style="color:#faf9eb">Zoek overdag het licht op.</b> Een wandeling in je lunchpauze telt al.</p></div>
+<div class="r rise" style="--i:2"><h3 class="r-num">03</h3><p class="r-text"><b style="color:#faf9eb">Slaap op vaste tijden.</b> Ook in het weekend.</p></div>
+<div class="r rise" style="--i:3"><h3 class="r-num">04</h3><p class="r-text"><b style="color:#faf9eb">Maak je avond donker.</b> Dim de lampen en beperk felle schermen.</p></div>
+<div class="r r-last rise" style="--i:4"><h3 class="r-num">05</h3><p class="r-text"><b style="color:#faf9eb">Eet op vaste momenten.</b> Geen grote maaltijd vlak voor bed.</p></div>
+</div>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme</p>
+<aside>Het mooie is dat je niet je hele leven hoeft om te gooien. Eén: begin je dag met natuurlijk licht. Ga binnen het eerste uur even naar buiten, een wandeling, de tuin of je balkon. Je hoeft niet in de zon te kijken, het gaat om het licht om je heen. Twee: zoek overdag vaker het daglicht op, bijvoorbeeld een wandeling in je lunchpauze. Drie: houd je slaapritme regelmatig, ook in het weekend. Vier: maak je avonden donkerder. Dim je verlichting, kies warm licht en beperk felle schermen. Je hoeft niet al het kunstlicht te vermijden, maar maak een duidelijk verschil tussen dag en avond. Vijf: eet op regelmatige tijden en eet geen grote maaltijd vlak voor het slapen. Ook voeding is een signaal voor je lichaam.</aside>
+</section>
+
+<section id="meenemen" class="light" data-transition="fade">
+<p class="eyebrow">Wat je hiervan meeneemt</p>
+<h2 class="title">Je lichaam leest signalen</h2>
+<div class="rows">
+<div class="r rise"><h3 class="r-num">01</h3><p class="r-text">Naar buiten gaan wanneer het licht wordt.</p></div>
+<div class="r rise" style="--i:1"><h3 class="r-num">02</h3><p class="r-text">Overdag genoeg daglicht krijgen.</p></div>
+<div class="r r-last rise" style="--i:2"><h3 class="r-num">03</h3><p class="r-text">’s Avonds weer ruimte maken voor rust en donker.</p></div>
+</div>
+<p class="lead rise" style="--i:3">Gezondheid hoeft niet ingewikkeld te zijn. Soms begint het bij iets heel eenvoudigs.</p>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme</p>
+<aside>Wat ik je vooral wil meegeven: je lichaam staat niet los van zijn omgeving. Het reageert voortdurend op signalen. Op licht en donker, op beweging, op voeding en op rust. Hoe beter die signalen passen bij je natuurlijke ritme, hoe beter je lichaam alles in de tijd kan organiseren. We hoeven gezondheid dus niet altijd ingewikkelder te maken. Soms begint het bij iets heel eenvoudigs. Naar buiten gaan wanneer het licht wordt. Overdag genoeg daglicht. En ’s avonds weer ruimte maken voor rust en donker.</aside>
+</section>
+
+<section id="call" class="red center" data-transition="fade">
+<p class="eyebrow">Neem je vragen mee</p>
+<h2 class="title rise">Groepscall<br>donderdag 20:00 uur</h2>
+<p class="lead rise" style="--i:1">Iets wat je niet snapt, wat je verrast, of waar je meer over wilt weten? Zet je vraag ook alvast in de community, dan neem ik hem mee.</p>
+<p class="footer">PROTOCOL40 · Week 2 · Bioritme</p>
+<aside>Is er iets wat je niet snapt, wat je verrast, of waar je meer over wilt weten? Schrijf het op en neem het mee naar de call van donderdagavond om 20:00 uur. Je mag je vraag ook alvast in de community zetten, dan neem ik hem mee. Ik zie je daar.</aside>
+</section>
+
+<section id="einde" class="dark center" data-transition="fade">
+<h2 class="hero" style="font-size:150px;letter-spacing:-5px">Consistentie<br>boven perfectie<span class="acc">.</span></h2>
+<p class="lead">Ik zie je in de community. — Maurice</p>
+<p class="footer">PROTOCOL<span class="acc">40</span> · 16 november t/m 25 december</p>
+<aside>Afsluiter. Je lichaam reageert de hele dag op licht en donker. Geef het de juiste signalen op het juiste moment, en het weet weer wat het moet doen.</aside>
+</section>
+
+</div>
+<div id="hud"></div>
+<script>
+const S=[...document.querySelectorAll('#stage>section')],st=document.getElementById('stage'),hud=document.getElementById('hud');
+let i=0,t;
+function fit(){const k=Math.min(innerWidth/1920,innerHeight/1080);st.style.transform=`scale(${k}) translate(-50%,-50%)`;}
+function go(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach((s,j)=>s.classList.toggle('on',j===i));
+ history.replaceState(null,'','#'+(i+1));hud.textContent=(i+1)+' / '+S.length+'   ←  →  ·  F = volledig scherm';
+ document.body.classList.add('show-hud');clearTimeout(t);t=setTimeout(()=>document.body.classList.remove('show-hud'),1800);}
+addEventListener('keydown',e=>{const k=e.key;
+ if(['ArrowRight','ArrowDown','PageDown',' ','Enter'].includes(k)){e.preventDefault();go(i+1)}
+ else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(k)){e.preventDefault();go(i-1)}
+ else if(k==='Home')go(0);else if(k==='End')go(S.length-1);
+ else if(k==='f'||k==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}});
+addEventListener('click',e=>go(e.clientX>innerWidth/3?i+1:i-1));
+addEventListener('resize',fit);
+fit();go((parseInt(location.hash.slice(1))||1)-1);
+</script></body></html>
